@@ -26,15 +26,14 @@ select p.Name, p.Price, m.Name from Products p join Manufacturers m on p.Manufac
 select AVG(p.Price),m.Name from Products p, Manufacturers m group by Manufacturer;
 
 -- 10 Select the names of manufacturer whose products have an average price larger than or equal to $150.
-select m.Name from Products p join Manufacturers m on p.Manufacturer = m.Code 
-where (select AVG(Price) from Products order by Manufacturer) >= 150;
+select Name from Manufacturers where (select AVG(p.Price) from Products p, Manufacturers m group by Manufacturer) >= 150;
 
 -- 11 Select the name and price of the cheapest product.
 select Name,Price from Products where Price = (select min(Price) from Products);
 
 -- 12 Select the name of each manufacturer along with the name and price of its most expensive product.
-select m.Name,p.Name,p.Price from Products p join Manufacturers m on p.Manufacturer = m.Code 
-where p.Price = (select max(Price) from Products order by Manufacturer);
+select m.Name,p.Name,p.Price from Manufacturers m, Products p
+where p.Price = (select MAX(Price) from Products) group by p.Manufacturer;
 
 -- 13 Add a new product: Loudspeakers, $70, manufacturer 2.
 INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(11,'Loudspeakers',70,2);
