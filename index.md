@@ -2,9 +2,47 @@
 
 ## Exercise 1
 * Import database
+
 ```bash
 cd ex1
 sqlite3 test.db < schema.sql
+```
+
+* schema & data
+
+```sql
+CREATE TABLE Manufacturers (
+  Code INTEGER,
+  Name VARCHAR(255) NOT NULL,
+  PRIMARY KEY (Code)
+);
+
+CREATE TABLE Products (
+  Code INTEGER,
+  Name VARCHAR(255) NOT NULL ,
+  Price DECIMAL NOT NULL ,
+  Manufacturer INTEGER NOT NULL,
+  PRIMARY KEY (Code),
+  FOREIGN KEY (Manufacturer) REFERENCES Manufacturers(Code)
+);
+
+INSERT INTO Manufacturers(Code,Name) VALUES(1,'Sony');
+INSERT INTO Manufacturers(Code,Name) VALUES(2,'Creative Labs');
+INSERT INTO Manufacturers(Code,Name) VALUES(3,'Hewlett-Packard');
+INSERT INTO Manufacturers(Code,Name) VALUES(4,'Iomega');
+INSERT INTO Manufacturers(Code,Name) VALUES(5,'Fujitsu');
+INSERT INTO Manufacturers(Code,Name) VALUES(6,'Winchester');
+
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(1,'Hard drive',240,5);
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(2,'Memory',120,6);
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(3,'ZIP drive',150,4);
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(4,'Floppy disk',5,6);
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(5,'Monitor',240,1);
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(6,'DVD drive',180,2);
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(7,'CD drive',90,2);
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(8,'Printer',270,3);
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(9,'Toner cartridge',66,3);
+INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(10,'DVD burner',180,2);
 ```
 
 * Problems
@@ -31,9 +69,46 @@ sqlite3 test.db < schema.sql
 
 ## Exercise 2
 * Import database
+
 ```bash
 cd ex2
 sqlite3 test.db < schema.sql
+```
+
+* schema & data
+
+```sql
+CREATE TABLE Departments (
+  Code INTEGER PRIMARY KEY,
+  Name varchar(255) NOT NULL ,
+  Budget decimal NOT NULL
+);
+
+CREATE TABLE Employees (
+  SSN INTEGER PRIMARY KEY,
+  Name varchar(255) NOT NULL ,
+  LastName varchar(255) NOT NULL ,
+  Department INTEGER NOT NULL ,
+  foreign key (department) references Departments(Code)
+);
+
+INSERT INTO Departments(Code,Name,Budget) VALUES(14,'IT',65000);
+INSERT INTO Departments(Code,Name,Budget) VALUES(37,'Accounting',15000);
+INSERT INTO Departments(Code,Name,Budget) VALUES(59,'Human Resources',240000);
+INSERT INTO Departments(Code,Name,Budget) VALUES(77,'Research',55000);
+
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('123234877','Michael','Rogers',14);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('152934485','Anand','Manikutty',14);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('222364883','Carol','Smith',37);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('326587417','Joe','Stevens',37);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('332154719','Mary-Anne','Foster',14);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('332569843','George','ODonnell',77);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('546523478','John','Doe',59);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('631231482','David','Smith',77);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('654873219','Zacary','Efron',59);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('745685214','Eric','Goldsmith',59);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('845657245','Elizabeth','Doe',14);
+INSERT INTO Employees(SSN,Name,LastName,Department) VALUES('845657246','Kumar','Swamy',14);
 ```
 
 * Problems
@@ -62,9 +137,43 @@ sqlite3 test.db < schema.sql
 
 ## Exercise 3
 * Import database
+
 ```bash
 cd ex3
 sqlite3 test.db < schema.sql
+```
+
+* schema & data
+
+```sql
+CREATE TABLE Movies (
+  Code INTEGER PRIMARY KEY,
+  Title VARCHAR(255) NOT NULL,
+  Rating VARCHAR(255)
+);
+
+CREATE TABLE MovieTheaters (
+  Code INTEGER PRIMARY KEY,
+  Name VARCHAR(255) NOT NULL,
+  Movie INTEGER,
+    FOREIGN KEY (Movie) REFERENCES Movies(Code)
+) ;
+
+INSERT INTO Movies(Code,Title,Rating) VALUES(1,'Citizen Kane','PG');
+ INSERT INTO Movies(Code,Title,Rating) VALUES(2,'Singin'' in the Rain','G');
+ INSERT INTO Movies(Code,Title,Rating) VALUES(3,'The Wizard of Oz','G');
+ INSERT INTO Movies(Code,Title,Rating) VALUES(4,'The Quiet Man',NULL);
+ INSERT INTO Movies(Code,Title,Rating) VALUES(5,'North by Northwest',NULL);
+ INSERT INTO Movies(Code,Title,Rating) VALUES(6,'The Last Tango in Paris','NC-17');
+ INSERT INTO Movies(Code,Title,Rating) VALUES(7,'Some Like it Hot','PG-13');
+ INSERT INTO Movies(Code,Title,Rating) VALUES(8,'A Night at the Opera',NULL);
+
+ INSERT INTO MovieTheaters(Code,Name,Movie) VALUES(1,'Odeon',5);
+ INSERT INTO MovieTheaters(Code,Name,Movie) VALUES(2,'Imperial',1);
+ INSERT INTO MovieTheaters(Code,Name,Movie) VALUES(3,'Majestic',NULL);
+ INSERT INTO MovieTheaters(Code,Name,Movie) VALUES(4,'Royale',6);
+ INSERT INTO MovieTheaters(Code,Name,Movie) VALUES(5,'Paraiso',3);
+ INSERT INTO MovieTheaters(Code,Name,Movie) VALUES(6,'Nickelodeon',NULL);
 ```
 
 * Problems
@@ -82,9 +191,50 @@ sqlite3 test.db < schema.sql
 
 ## Exercise 4
 * Import database
+
 ```bash
 cd ex4
 sqlite3 test.db < schema.sql
+```
+
+* schema & data
+
+```sql
+CREATE TABLE Pieces (
+ Code INTEGER PRIMARY KEY NOT NULL,
+ Name TEXT NOT NULL
+ );
+CREATE TABLE Providers (
+ Code VARCHAR(40) PRIMARY KEY NOT NULL,
+ Name TEXT NOT NULL
+ );
+CREATE TABLE Provides (
+ Piece INTEGER,
+ Provider VARCHAR(40),
+ Price INTEGER NOT NULL,
+ PRIMARY KEY(Piece, Provider),
+ FOREIGN KEY (Piece) REFERENCES Pieces(Code),
+ FOREIGN KEY (Provider) REFERENCES Providers(Code)
+ );
+
+INSERT INTO Providers(Code, Name) VALUES('HAL','Clarke Enterprises');
+INSERT INTO Providers(Code, Name) VALUES('RBT','Susan Calvin Corp.');
+INSERT INTO Providers(Code, Name) VALUES('TNBC','Skellington Supplies');
+
+INSERT INTO Pieces(Code, Name) VALUES(1,'Sprocket');
+INSERT INTO Pieces(Code, Name) VALUES(2,'Screw');
+INSERT INTO Pieces(Code, Name) VALUES(3,'Nut');
+INSERT INTO Pieces(Code, Name) VALUES(4,'Bolt');
+
+INSERT INTO Provides(Piece, Provider, Price) VALUES(1,'HAL',10);
+INSERT INTO Provides(Piece, Provider, Price) VALUES(1,'RBT',15);
+INSERT INTO Provides(Piece, Provider, Price) VALUES(2,'HAL',20);
+INSERT INTO Provides(Piece, Provider, Price) VALUES(2,'RBT',15);
+INSERT INTO Provides(Piece, Provider, Price) VALUES(2,'TNBC',14);
+INSERT INTO Provides(Piece, Provider, Price) VALUES(3,'RBT',50);
+INSERT INTO Provides(Piece, Provider, Price) VALUES(3,'TNBC',45);
+INSERT INTO Provides(Piece, Provider, Price) VALUES(4,'HAL',5);
+INSERT INTO Provides(Piece, Provider, Price) VALUES(4,'RBT',7);
 ```
 
 * Problems

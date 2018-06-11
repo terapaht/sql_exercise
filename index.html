@@ -1,13 +1,49 @@
 <h1 id="sql-exercises">SQL Exercises</h1>
 <h2 id="exercise-1">Exercise 1</h2>
 <ul>
-<li><p>Import database</p>
+<li>Import database</li>
+</ul>
 <pre><code class="lang-bash"><span class="hljs-keyword">cd</span> ex1
 sqlite3 <span class="hljs-keyword">test</span>.<span class="hljs-keyword">db</span> &lt; schema.sql
 </code></pre>
-</li>
-<li><p>Problems</p>
-  <!-- * Select the names of all the products in the store. -->
+<ul>
+<li>schema &amp; data</li>
+</ul>
+<pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Manufacturers (
+  Code <span class="hljs-built_in">INTEGER</span>,
+  <span class="hljs-keyword">Name</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  PRIMARY <span class="hljs-keyword">KEY</span> (Code)
+);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Products (
+  Code <span class="hljs-built_in">INTEGER</span>,
+  <span class="hljs-keyword">Name</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> ,
+  Price <span class="hljs-built_in">DECIMAL</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> ,
+  Manufacturer <span class="hljs-built_in">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  PRIMARY <span class="hljs-keyword">KEY</span> (Code),
+  FOREIGN <span class="hljs-keyword">KEY</span> (Manufacturer) <span class="hljs-keyword">REFERENCES</span> Manufacturers(Code)
+);
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Manufacturers(Code,<span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">'Sony'</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Manufacturers(Code,<span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>,<span class="hljs-string">'Creative Labs'</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Manufacturers(Code,<span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">3</span>,<span class="hljs-string">'Hewlett-Packard'</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Manufacturers(Code,<span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">4</span>,<span class="hljs-string">'Iomega'</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Manufacturers(Code,<span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">5</span>,<span class="hljs-string">'Fujitsu'</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Manufacturers(Code,<span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">6</span>,<span class="hljs-string">'Winchester'</span>);
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Products(Code,<span class="hljs-keyword">Name</span>,Price,Manufacturer) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">'Hard drive'</span>,<span class="hljs-number">240</span>,<span class="hljs-number">5</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Products(Code,<span class="hljs-keyword">Name</span>,Price,Manufacturer) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>,<span class="hljs-string">'Memory'</span>,<span class="hljs-number">120</span>,<span class="hljs-number">6</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Products(Code,<span class="hljs-keyword">Name</span>,Price,Manufacturer) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">3</span>,<span class="hljs-string">'ZIP drive'</span>,<span class="hljs-number">150</span>,<span class="hljs-number">4</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Products(Code,<span class="hljs-keyword">Name</span>,Price,Manufacturer) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">4</span>,<span class="hljs-string">'Floppy disk'</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Products(Code,<span class="hljs-keyword">Name</span>,Price,Manufacturer) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">5</span>,<span class="hljs-string">'Monitor'</span>,<span class="hljs-number">240</span>,<span class="hljs-number">1</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Products(Code,<span class="hljs-keyword">Name</span>,Price,Manufacturer) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">6</span>,<span class="hljs-string">'DVD drive'</span>,<span class="hljs-number">180</span>,<span class="hljs-number">2</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Products(Code,<span class="hljs-keyword">Name</span>,Price,Manufacturer) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">7</span>,<span class="hljs-string">'CD drive'</span>,<span class="hljs-number">90</span>,<span class="hljs-number">2</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Products(Code,<span class="hljs-keyword">Name</span>,Price,Manufacturer) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">8</span>,<span class="hljs-string">'Printer'</span>,<span class="hljs-number">270</span>,<span class="hljs-number">3</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Products(Code,<span class="hljs-keyword">Name</span>,Price,Manufacturer) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">9</span>,<span class="hljs-string">'Toner cartridge'</span>,<span class="hljs-number">66</span>,<span class="hljs-number">3</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Products(Code,<span class="hljs-keyword">Name</span>,Price,Manufacturer) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">10</span>,<span class="hljs-string">'DVD burner'</span>,<span class="hljs-number">180</span>,<span class="hljs-number">2</span>);
+</code></pre>
+<ul>
+<li>Problems  <!-- * Select the names of all the products in the store. -->
 <ul>
 <li>Select the names and the prices of all the products in the store.</li>
 <li>Select the name of the products with a price less than or equal to $200.</li>
@@ -31,13 +67,48 @@ sqlite3 <span class="hljs-keyword">test</span>.<span class="hljs-keyword">db</sp
 </ul>
 <h2 id="exercise-2">Exercise 2</h2>
 <ul>
-<li><p>Import database</p>
+<li>Import database</li>
+</ul>
 <pre><code class="lang-bash"><span class="hljs-keyword">cd</span> ex2
 sqlite3 <span class="hljs-keyword">test</span>.<span class="hljs-keyword">db</span> &lt; schema.sql
 </code></pre>
-</li>
-<li><p>Problems</p>
-  <!-- * Select the last name of all employees. -->
+<ul>
+<li>schema &amp; data</li>
+</ul>
+<pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Departments (
+  Code <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+  <span class="hljs-keyword">Name</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> ,
+  Budget <span class="hljs-built_in">decimal</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Employees (
+  SSN <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+  <span class="hljs-keyword">Name</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> ,
+  LastName <span class="hljs-built_in">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> ,
+  Department <span class="hljs-built_in">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> ,
+  foreign <span class="hljs-keyword">key</span> (department) <span class="hljs-keyword">references</span> Departments(Code)
+);
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Departments(Code,<span class="hljs-keyword">Name</span>,Budget) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">14</span>,<span class="hljs-string">'IT'</span>,<span class="hljs-number">65000</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Departments(Code,<span class="hljs-keyword">Name</span>,Budget) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">37</span>,<span class="hljs-string">'Accounting'</span>,<span class="hljs-number">15000</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Departments(Code,<span class="hljs-keyword">Name</span>,Budget) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">59</span>,<span class="hljs-string">'Human Resources'</span>,<span class="hljs-number">240000</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Departments(Code,<span class="hljs-keyword">Name</span>,Budget) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">77</span>,<span class="hljs-string">'Research'</span>,<span class="hljs-number">55000</span>);
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'123234877'</span>,<span class="hljs-string">'Michael'</span>,<span class="hljs-string">'Rogers'</span>,<span class="hljs-number">14</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'152934485'</span>,<span class="hljs-string">'Anand'</span>,<span class="hljs-string">'Manikutty'</span>,<span class="hljs-number">14</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'222364883'</span>,<span class="hljs-string">'Carol'</span>,<span class="hljs-string">'Smith'</span>,<span class="hljs-number">37</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'326587417'</span>,<span class="hljs-string">'Joe'</span>,<span class="hljs-string">'Stevens'</span>,<span class="hljs-number">37</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'332154719'</span>,<span class="hljs-string">'Mary-Anne'</span>,<span class="hljs-string">'Foster'</span>,<span class="hljs-number">14</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'332569843'</span>,<span class="hljs-string">'George'</span>,<span class="hljs-string">'ODonnell'</span>,<span class="hljs-number">77</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'546523478'</span>,<span class="hljs-string">'John'</span>,<span class="hljs-string">'Doe'</span>,<span class="hljs-number">59</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'631231482'</span>,<span class="hljs-string">'David'</span>,<span class="hljs-string">'Smith'</span>,<span class="hljs-number">77</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'654873219'</span>,<span class="hljs-string">'Zacary'</span>,<span class="hljs-string">'Efron'</span>,<span class="hljs-number">59</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'745685214'</span>,<span class="hljs-string">'Eric'</span>,<span class="hljs-string">'Goldsmith'</span>,<span class="hljs-number">59</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'845657245'</span>,<span class="hljs-string">'Elizabeth'</span>,<span class="hljs-string">'Doe'</span>,<span class="hljs-number">14</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Employees(SSN,<span class="hljs-keyword">Name</span>,LastName,Department) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'845657246'</span>,<span class="hljs-string">'Kumar'</span>,<span class="hljs-string">'Swamy'</span>,<span class="hljs-number">14</span>);
+</code></pre>
+<ul>
+<li>Problems  <!-- * Select the last name of all employees. -->
 <ul>
 <li>Select the last name of all employees, without duplicates.<!-- * Select all the data of employees whose last name is "Smith". --></li>
 <li>Select all the data of employees whose last name is &quot;Smith&quot; or &quot;Doe&quot;.<!-- * Select all the data of employees that work in department 14. -->
@@ -61,13 +132,45 @@ sqlite3 <span class="hljs-keyword">test</span>.<span class="hljs-keyword">db</sp
 </ul>
 <h2 id="exercise-3">Exercise 3</h2>
 <ul>
-<li><p>Import database</p>
+<li>Import database</li>
+</ul>
 <pre><code class="lang-bash"><span class="hljs-keyword">cd</span> ex3
 sqlite3 <span class="hljs-keyword">test</span>.<span class="hljs-keyword">db</span> &lt; schema.sql
 </code></pre>
-</li>
-<li><p>Problems</p>
-  <!-- * Select the title of all movies. -->
+<ul>
+<li>schema &amp; data</li>
+</ul>
+<pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Movies (
+  Code <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+  Title <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  Rating <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>)
+);
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> MovieTheaters (
+  Code <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+  <span class="hljs-keyword">Name</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+  Movie <span class="hljs-built_in">INTEGER</span>,
+    FOREIGN <span class="hljs-keyword">KEY</span> (Movie) <span class="hljs-keyword">REFERENCES</span> Movies(Code)
+) ;
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Movies(Code,Title,Rating) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">'Citizen Kane'</span>,<span class="hljs-string">'PG'</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Movies(Code,Title,Rating) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>,<span class="hljs-string">'Singin'' in the Rain'</span>,<span class="hljs-string">'G'</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Movies(Code,Title,Rating) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">3</span>,<span class="hljs-string">'The Wizard of Oz'</span>,<span class="hljs-string">'G'</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Movies(Code,Title,Rating) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">4</span>,<span class="hljs-string">'The Quiet Man'</span>,<span class="hljs-literal">NULL</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Movies(Code,Title,Rating) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">5</span>,<span class="hljs-string">'North by Northwest'</span>,<span class="hljs-literal">NULL</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Movies(Code,Title,Rating) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">6</span>,<span class="hljs-string">'The Last Tango in Paris'</span>,<span class="hljs-string">'NC-17'</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Movies(Code,Title,Rating) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">7</span>,<span class="hljs-string">'Some Like it Hot'</span>,<span class="hljs-string">'PG-13'</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Movies(Code,Title,Rating) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">8</span>,<span class="hljs-string">'A Night at the Opera'</span>,<span class="hljs-literal">NULL</span>);
+
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> MovieTheaters(Code,<span class="hljs-keyword">Name</span>,Movie) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">'Odeon'</span>,<span class="hljs-number">5</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> MovieTheaters(Code,<span class="hljs-keyword">Name</span>,Movie) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>,<span class="hljs-string">'Imperial'</span>,<span class="hljs-number">1</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> MovieTheaters(Code,<span class="hljs-keyword">Name</span>,Movie) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">3</span>,<span class="hljs-string">'Majestic'</span>,<span class="hljs-literal">NULL</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> MovieTheaters(Code,<span class="hljs-keyword">Name</span>,Movie) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">4</span>,<span class="hljs-string">'Royale'</span>,<span class="hljs-number">6</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> MovieTheaters(Code,<span class="hljs-keyword">Name</span>,Movie) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">5</span>,<span class="hljs-string">'Paraiso'</span>,<span class="hljs-number">3</span>);
+ <span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> MovieTheaters(Code,<span class="hljs-keyword">Name</span>,Movie) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">6</span>,<span class="hljs-string">'Nickelodeon'</span>,<span class="hljs-literal">NULL</span>);
+</code></pre>
+<ul>
+<li>Problems  <!-- * Select the title of all movies. -->
 <ul>
 <li>Show all the distinct ratings in the database.</li>
 <li>Show all unrated movies.</li>
@@ -86,13 +189,52 @@ sqlite3 <span class="hljs-keyword">test</span>.<span class="hljs-keyword">db</sp
 </ul>
 <h2 id="exercise-4">Exercise 4</h2>
 <ul>
-<li><p>Import database</p>
+<li>Import database</li>
+</ul>
 <pre><code class="lang-bash"><span class="hljs-keyword">cd</span> ex4
 sqlite3 <span class="hljs-keyword">test</span>.<span class="hljs-keyword">db</span> &lt; schema.sql
 </code></pre>
-</li>
-<li><p>Problems</p>
 <ul>
+<li>schema &amp; data</li>
+</ul>
+<pre><code class="lang-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Pieces (
+ Code <span class="hljs-built_in">INTEGER</span> PRIMARY <span class="hljs-keyword">KEY</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+ <span class="hljs-keyword">Name</span> <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+ );
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Providers (
+ Code <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">40</span>) PRIMARY <span class="hljs-keyword">KEY</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+ <span class="hljs-keyword">Name</span> <span class="hljs-built_in">TEXT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+ );
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> Provides (
+ Piece <span class="hljs-built_in">INTEGER</span>,
+ Provider <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">40</span>),
+ Price <span class="hljs-built_in">INTEGER</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+ PRIMARY <span class="hljs-keyword">KEY</span>(Piece, Provider),
+ FOREIGN <span class="hljs-keyword">KEY</span> (Piece) <span class="hljs-keyword">REFERENCES</span> Pieces(Code),
+ FOREIGN <span class="hljs-keyword">KEY</span> (Provider) <span class="hljs-keyword">REFERENCES</span> Providers(Code)
+ );
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Providers(Code, <span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'HAL'</span>,<span class="hljs-string">'Clarke Enterprises'</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Providers(Code, <span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'RBT'</span>,<span class="hljs-string">'Susan Calvin Corp.'</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Providers(Code, <span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-string">'TNBC'</span>,<span class="hljs-string">'Skellington Supplies'</span>);
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Pieces(Code, <span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">'Sprocket'</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Pieces(Code, <span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>,<span class="hljs-string">'Screw'</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Pieces(Code, <span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">3</span>,<span class="hljs-string">'Nut'</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Pieces(Code, <span class="hljs-keyword">Name</span>) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">4</span>,<span class="hljs-string">'Bolt'</span>);
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Provides(Piece, Provider, Price) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">'HAL'</span>,<span class="hljs-number">10</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Provides(Piece, Provider, Price) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">'RBT'</span>,<span class="hljs-number">15</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Provides(Piece, Provider, Price) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>,<span class="hljs-string">'HAL'</span>,<span class="hljs-number">20</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Provides(Piece, Provider, Price) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>,<span class="hljs-string">'RBT'</span>,<span class="hljs-number">15</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Provides(Piece, Provider, Price) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>,<span class="hljs-string">'TNBC'</span>,<span class="hljs-number">14</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Provides(Piece, Provider, Price) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">3</span>,<span class="hljs-string">'RBT'</span>,<span class="hljs-number">50</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Provides(Piece, Provider, Price) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">3</span>,<span class="hljs-string">'TNBC'</span>,<span class="hljs-number">45</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Provides(Piece, Provider, Price) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">4</span>,<span class="hljs-string">'HAL'</span>,<span class="hljs-number">5</span>);
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> Provides(Piece, Provider, Price) <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">4</span>,<span class="hljs-string">'RBT'</span>,<span class="hljs-number">7</span>);
+</code></pre>
+<ul>
+<li>Problems<ul>
 <li>Obtain the average price of each piece (show only the piece code and the average price).</li>
 <li>Obtain the names of all providers who supply piece 1.</li>
 <li>Select the name of pieces provided by provider with code &quot;HAL&quot;.<!-- * For each piece, find the most expensive offering of that piece and include the piece name, provider name, and price (note that there could be two providers who supply the same piece at the most expensive price). --></li>
