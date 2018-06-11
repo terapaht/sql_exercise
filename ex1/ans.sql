@@ -47,24 +47,23 @@
    ...> ;
 
 11.  select Name,Price
-   ...> from Products
-   ...> where Price = (select min(Price)
-   ...> 	from Products
-   ...> 	group by Price)
-   ...> ; 
+   from Products
+   where Price = (select min(Price)
+    	from Products)
+   ; 
 
 12. select m.Name,p.Name,p.Price
-   ...> from Products p ,Manufacturers m
-   ...> where m.Code = p.Manufacturer
-   ...> and p.Name in
-   ...> (select Name
-   ...> from Products
-   ...> where Price in (
-   ...> select max(Price)
-   ...> from Products
-   ...> group by Manufacturer)
-   ...> )
-   ...> ;
+   from Products p ,Manufacturers m
+   where m.Code = p.Manufacturer
+   and p.Name in
+   (select Name
+   from Products
+   where Price in (
+   select max(Price)
+   from Products
+   group by Manufacturer)
+   )
+   ;
 
 13. insert into Products values (11,"Loudspeakers",70,2);
 14. update Products set Name = "Laser Printer" where code =8;
