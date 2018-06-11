@@ -32,7 +32,7 @@ select name from manufacturers where code in (select manufacturer from products 
 select name, price from products where price = (select min(price) from products);
 
 --Select the name of each manufacturer along with the name and price of its most expensive product.
-select name from manufacturers where code=(select manufacturer from products where price=(select max(price) from products));
+select m.name, p.name, p.price from manufacturers m,products p where p.code=(select code from products where price=(select max(price) from products)) and p.manufacturer = m.code;
 
 --Add a new product: Loudspeakers, $70, manufacturer 2.
 INSERT INTO Products(Name,Price,Manufacturer) VALUES('Loudspeakers',70,2);
