@@ -84,3 +84,22 @@ sqlite3 <span class="hljs-keyword">test</span>.<span class="hljs-keyword">db</sp
 </ul>
 </li>
 </ul>
+<h2 id="exercise-4">Exercise 4</h2>
+<ul>
+<li><p>Import database</p>
+<pre><code class="lang-bash"><span class="hljs-keyword">cd</span> ex4
+sqlite3 <span class="hljs-keyword">test</span>.<span class="hljs-keyword">db</span> &lt; schema.sql
+</code></pre>
+</li>
+<li><p>Problems</p>
+<ul>
+<li>Obtain the average price of each piece (show only the piece code and the average price).</li>
+<li>Obtain the names of all providers who supply piece 1.</li>
+<li>Select the name of pieces provided by provider with code &quot;HAL&quot;.<!-- * For each piece, find the most expensive offering of that piece and include the piece name, provider name, and price (note that there could be two providers who supply the same piece at the most expensive price). --></li>
+<li>Add an entry to the database to indicate that &quot;Skellington Supplies&quot; (code &quot;TNBC&quot;) will provide sprockets (code &quot;1&quot;) for 7 cents each.</li>
+<li>Increase all prices by one cent.</li>
+<li>Update the database to reflect that &quot;Susan Calvin Corp.&quot; (code &quot;RBT&quot;) will not supply bolts (code 4).</li>
+<li>Update the database to reflect that &quot;Susan Calvin Corp.&quot; (code &quot;RBT&quot;) will not supply any pieces (the provider should still remain in the database).</li>
+</ul>
+</li>
+</ul>

@@ -79,3 +79,20 @@ sqlite3 test.db < schema.sql
     * Add the unrated movie "One, Two, Three".
     * Set the rating of all unrated movies to "G".
     * Remove movie theaters projecting movies rated "NC-17".
+
+## Exercise 4
+* Import database
+```bash
+cd ex4
+sqlite3 test.db < schema.sql
+```
+
+* Problems
+    * Obtain the average price of each piece (show only the piece code and the average price).
+    * Obtain the names of all providers who supply piece 1.
+    * Select the name of pieces provided by provider with code "HAL".
+    <!-- * For each piece, find the most expensive offering of that piece and include the piece name, provider name, and price (note that there could be two providers who supply the same piece at the most expensive price). -->
+    * Add an entry to the database to indicate that "Skellington Supplies" (code "TNBC") will provide sprockets (code "1") for 7 cents each.
+    * Increase all prices by one cent.
+    * Update the database to reflect that "Susan Calvin Corp." (code "RBT") will not supply bolts (code 4).
+    * Update the database to reflect that "Susan Calvin Corp." (code "RBT") will not supply any pieces (the provider should still remain in the database).
