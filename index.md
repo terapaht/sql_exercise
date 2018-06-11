@@ -59,3 +59,23 @@ sqlite3 test.db < schema.sql
     * Delete from the table all employees in the IT department (code 14).
     * Delete from the table all employees who work in departments with a budget greater than or equal to $60,000.
     * Delete from the table all employees.
+
+## Exercise 3
+* Import database
+```bash
+cd ex3
+sqlite3 test.db < schema.sql
+```
+
+* Problems
+    <!-- * Select the title of all movies. -->
+    * Show all the distinct ratings in the database.
+    * Show all unrated movies.
+    * Select all movie theaters that are not currently showing a movie.
+    * Select all data from all movie theaters
+        * and, additionally, the data from the movie that is being shown in the theater (if one is being shown).
+    * Select all data from all movies and, if that movie is being shown in a theater, show the data from the theater.
+    * Show the titles of movies not currently being shown in any theaters.
+    * Add the unrated movie "One, Two, Three".
+    * Set the rating of all unrated movies to "G".
+    * Remove movie theaters projecting movies rated "NC-17".
