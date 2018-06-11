@@ -32,8 +32,7 @@ select Name from Manufacturers where (select AVG(p.Price) from Products p, Manuf
 select Name,Price from Products where Price = (select min(Price) from Products);
 
 -- 12 Select the name of each manufacturer along with the name and price of its most expensive product.
-select m.Name,p.Name,p.Price from Manufacturers m, Products p
-where p.Price = (select MAX(Price) from Products) group by p.Manufacturer;
+select m.Name,p.Name,p.Price from Manufacturers m, Products p where m.Code = p.Manufacturer and p.Price = (select MAX(Price) from Manufacturers, Products where p.Manufacturer = Manufacturer) group by p.Code order by p.Manufacturer;
 
 -- 13 Add a new product: Loudspeakers, $70, manufacturer 2.
 INSERT INTO Products(Code,Name,Price,Manufacturer) VALUES(11,'Loudspeakers',70,2);
